@@ -9,7 +9,7 @@ pipeline {
     maven 'maven'
     }
   environment{
-    DOCKER_HOME = tool name: 'docker_19_03_6', type: 'dockerTool'
+    DOCKER_HOME = tool name: 'docker', type: 'dockerTool'
     VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
     }
 //   options {
