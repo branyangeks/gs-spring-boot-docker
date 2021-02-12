@@ -1,10 +1,5 @@
 pipeline {
   agent any
-//  {
-//    kubernetes {
-//     label 'jenkinskube'
-//    }
-//  }
   tools {
     maven 'maven'
     }
@@ -12,9 +7,6 @@ pipeline {
     DOCKER_HOME = tool name: 'docker', type: 'dockerTool'
     VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
     }
-//   options {
-//     gitLabConnection('Gitlab')
-//   }
   stages {
     stage('Check out') {
       steps {
@@ -44,4 +36,4 @@ pipeline {
         }
     }
    }
- }//tes
+ }
