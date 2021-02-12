@@ -23,9 +23,9 @@ pipeline {
     stage('Docker Build'){
         steps{
             echo "Running ${VERSION} on ${env.JENKINS_URL}"
-            withDockerRegistry(credentialsId: 'aksregistrykey', url: 'aksregistryuseast.azurecr.io') {
+            sh 'docker login ${ACR_LOGINSERVER} -u ${ACR_ID} -p ${ACR_PASSWORD}'
             sh 'docker build -t aksregistryuseast.azurecr.io/gs-spring-boot-docker:${BUILD_NUMBER} .'
-            }
+            
     }
    }
     stage('Docker Push') {
