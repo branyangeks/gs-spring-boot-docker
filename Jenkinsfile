@@ -6,7 +6,7 @@ pipeline {
 //    }
 //  }
   tools {
-    maven 'maven_3.6.3'
+    maven 'maven'
     }
   environment{
     DOCKER_HOME = tool name: 'docker_19_03_6', type: 'dockerTool'
