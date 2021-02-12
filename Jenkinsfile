@@ -14,18 +14,19 @@ pipeline {
       }
     }
 
-    stage('Build'){
-        steps{
-            sh "mvn clean package"
-        }
-    }
+    // stage('Build'){
+    //     steps{
+    //         sh "mvn clean package"
+    //     }
+    // }
 
     stage('Docker Build'){
         steps{
             echo "Running ${VERSION} on ${env.JENKINS_URL}"
             withCredentials([usernamePassword(credentialsId: 'aksregistrykey', passwordVariable: 'ACR_PASSWORD', usernameVariable: 'ACR_ID')]) {
               sh 'docker login ${ACR_LOGINSERVER} -u ${ACR_ID} -p ${ACR_PASSWORD}'
-              sh 'docker build -t aksregistryuseast.azurecr.io/gs-spring-boot-docker:${BUILD_NUMBER} .'
+              sh 'mvn compile jib:build'
+            //  sh 'docker build -t aksregistryuseast.azurecr.io/gs-spring-boot-docker:${BUILD_NUMBER} .'
             }
             
     }
