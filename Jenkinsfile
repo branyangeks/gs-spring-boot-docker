@@ -33,7 +33,7 @@ pipeline {
     //         echo "Running ${VERSION} on ${env.JENKINS_URL}"
     //         sh 'docker build -t agiletrailblazers.jfrog.io/demorepo/agiletrailblazers:${BUILD_NUMBER} .'
     // }
-    }
+   // }
     stage('Docker Push') {
         steps{
             withDockerRegistry(credentialsId: 'aksregistrykey', url: 'aksregistryuseast.azurecr.io') {
