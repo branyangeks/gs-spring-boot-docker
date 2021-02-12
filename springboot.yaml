@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-service
+  labels:
+    app: spring-boot
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  selector:
+    app: spring-boot
+  type: LoadBalancer
+---           
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-boot
+  template:
+    metadata:
+      labels:
+        app: spring-boot
+    spec:
+      containers:
+      - image: aksregistryuseast.azurecr.io/spring-boot-docker:latest
+        imagePullPolicy: Always
+        name: spring-boot
+        ports:
+        - containerPort: 8080
+          name: spring-boot
+      # imagePullSecrets:
+      # - name: aksregistrysecret
