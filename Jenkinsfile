@@ -31,12 +31,12 @@ pipeline {
             
     }
    }
-    stage('Docker Push') {
-        steps{
-            withDockerRegistry(credentialsId: 'aksregistrykey', url: 'aksregistryuseast.azurecr.io') {
-              sh "docker push aksregistryuseast.azurecr.io/gs-spring-boot-docker:${BUILD_NUMBER}"
-            }
-        }
-    }
+    // stage('Docker Push') {
+    //     steps{
+    //         withDockerRegistry(credentialsId: 'aksregistrykey', url: 'aksregistryuseast.azurecr.io') {
+    //           sh "docker push aksregistryuseast.azurecr.io/gs-spring-boot-docker:${BUILD_NUMBER}"
+    //         }
+    //     }
+    // }
    }
  }
