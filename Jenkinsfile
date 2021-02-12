@@ -28,18 +28,16 @@ pipeline {
         }
     }
 
-    // stage('Docker Build'){
-    //     steps{
-    //         echo "Running ${VERSION} on ${env.JENKINS_URL}"
-    //         sh 'docker build -t agiletrailblazers.jfrog.io/demorepo/agiletrailblazers:${BUILD_NUMBER} .'
-    // }
-   // }
+    stage('Docker Build'){
+        steps{
+            echo "Running ${VERSION} on ${env.JENKINS_URL}"
+            sh 'docker build -t aksregistryuseast.azurecr.io/gs-spring-boot-docker:${BUILD_NUMBER} .'
+    }
+   }
     stage('Docker Push') {
         steps{
             withDockerRegistry(credentialsId: 'aksregistrykey', url: 'aksregistryuseast.azurecr.io') {
-              sh "mvn compile jib:build"
-                // sh "docker push agiletrailblazers.jfrog.io/demorepo/agiletrailblazers:${BUILD_NUMBER}"
-            
+              sh "docker push aksregistryuseast.azurecr.io/gs-spring-boot-docker:${BUILD_NUMBER}"
             }
         }
     }
