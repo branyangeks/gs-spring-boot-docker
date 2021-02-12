@@ -24,7 +24,7 @@ pipeline {
 
     stage('Build'){
         steps{
-            sh "mvn package spring-boot:run"
+            sh "mvn clean package"
         }
     }
 
