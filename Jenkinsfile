@@ -23,8 +23,10 @@ pipeline {
     stage('Docker Build'){
         steps{
             echo "Running ${VERSION} on ${env.JENKINS_URL}"
-            sh 'docker login ${ACR_LOGINSERVER} -u ${ACR_ID} -p ${ACR_PASSWORD}'
-            sh 'docker build -t aksregistryuseast.azurecr.io/gs-spring-boot-docker:${BUILD_NUMBER} .'
+            withCredentials([usernamePassword(credentialsId: 'aksregistrykey', passwordVariable: 'ACR_PASSWORD', usernameVariable: 'ACR_ID')]) {
+              sh 'docker login ${ACR_LOGINSERVER} -u ${ACR_ID} -p ${ACR_PASSWORD}'
+              sh 'docker build -t aksregistryuseast.azurecr.io/gs-spring-boot-docker:${BUILD_NUMBER} .'
+            }
             
     }
    }
