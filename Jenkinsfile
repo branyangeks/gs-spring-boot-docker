@@ -24,6 +24,7 @@ pipeline {
 
     stage('Build'){
         steps{
+            sh "cd complete"
             sh "mvn package spring-boot:run"
         }
     }
